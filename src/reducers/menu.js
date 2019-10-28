@@ -18,7 +18,7 @@ const MENU_STATE = {
       value: '分享'
     },
     {
-      key: 'sak',
+      key: 'ask',
       value: '问答'
     },
     {

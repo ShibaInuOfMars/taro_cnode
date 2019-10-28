@@ -9,7 +9,7 @@ import { showDrawer, hideDrawer, changeCata } from './../../actions/menu';
 
 import './menu.less'
 
-const mapStateToProps = (store) => ({ ...store.menu })
+const mapStateToProps = (store) => ({ ...store.menu, limit: store.topic.limit })
 
 const mapDispatchToProps = (dispatch) => ({
 	showMenu: () => {
@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
 		dispatch(hideDrawer())
 	},
 
-	changeCurrentCata: (cata) => {
-		dispatch(changeCata(cata))
+	changeCurrentCata: (cata, limit) => {
+		dispatch(changeCata(cata, limit))
 	}
 })
 
@@ -37,10 +37,14 @@ class Menu extends Component {
 	// 改变当前所在分类
 	changeCurrentCata(index) {
 		// console.log(index)
-		const { cataData, changeCurrentCata } = this.props
+		const { cataData, currentCata, limit,  changeCurrentCata } = this.props
 		const cate = cataData[index]
 		// console.log(cate)
-		changeCurrentCata(cate)
+
+		// 判断这次要改变的分类是否与当前所在分类相等，不相等才触发
+		if(cate.key !== currentCata.key) {
+			changeCurrentCata(cate, limit)
+		}
 	}
 
 	render() {

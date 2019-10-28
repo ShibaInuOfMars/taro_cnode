@@ -1,4 +1,4 @@
-const BASE_URL = 'https://cnodejs.org/api/v'
+const BASE_URL = 'https://cnodejs.org/api/v1'
 
 const CN_API = {
   get_topics: BASE_URL + '/topics', // 获取主题

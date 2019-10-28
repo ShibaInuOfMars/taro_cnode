@@ -4,6 +4,10 @@ import {
   CHANGE_CATA
 } from './../constants/menu'
 
+import {
+  getTopicListAsync
+} from './topic'
+
 // 显示抽屉
 const changeDrawerToTrue = () => ({
   type: SHOW_DRAWER
@@ -35,8 +39,11 @@ export const hideDrawer = () => {
 }
 
 // 改变当前所在分类
-export const changeCata = (currentCata) => {
+export const changeCata = (currentCata, limit) => {
   return (dispatch) => {
     dispatch(changeCurrentCata(currentCata))
+
+    // 改变分类的同时重新请求列表数据
+    dispatch(getTopicListAsync({tab: currentCata.key, page: 1, limit, mdrender: 'false'}))
   }
 }
