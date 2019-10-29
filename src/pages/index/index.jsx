@@ -9,21 +9,23 @@ import './index.less'
 
 class Index extends Component {
 
-    config = {
-    navigationBarTitleText: '首页'
-  }
-
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
-  render () {
+  /* config = {
+    navigationBarTitleText: '999'
+  } */
+
+  render() {
+    Taro.setNavigationBarTitle({title: 'CNode'})
+    
     return (
       <View className='index'>
         <Menu />
