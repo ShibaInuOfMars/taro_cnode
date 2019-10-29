@@ -10,13 +10,17 @@ import './topicItem.less'
 
 class TopicItem extends Component {
 
+	jumpToDetail(topic) {
+		Taro.navigateTo({url: '/pages/detail/index?topicId=' + topic.id})
+	}
+
 	render() {
 		const {topicItem} = this.props
 
 		const tabType = topicItem.top ? '置顶' : (topicItem.good ? '精华' : (topicItem.tab == 'share' ? '分享' : (topicItem.tab == 'ask' ? '问答' : '主题')))
 
 		return (
-			<View className='item' hoverClass='hover-class'>
+			<View className='item' hoverClass='hover-class' onClick={this.jumpToDetail.bind(this, topicItem)}>
 				<AtAvatar circle image={topicItem.author ? topicItem.author.avatar_url : ''} />
 				<View className='right'>
 					<View className='title-wrapper'>

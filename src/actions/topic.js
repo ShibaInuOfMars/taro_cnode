@@ -5,7 +5,8 @@ import tAjax from './../utils/tAjax'
 
 import {
 	GET_TOPIC_LIST,
-	ADD_TOPIC_LIST
+	ADD_TOPIC_LIST,
+	GET_TOPIC_DETAIL
 } from './../constants/topic'
 
 // 获取列表
@@ -21,11 +22,17 @@ const addTopicList = (list, page) => ({
 	page
 })
 
+// 获取话题详情信息
+const getTopicDetail = (detail) => ({
+	type: GET_TOPIC_DETAIL,
+	detail
+})
+
 // 获取列表
 export const getTopicListAsync = (params) => {
 	return async (dispatch) => {
 		let res = await tAjax(CN_API.get_topics, params)
-		console.log(res)
+		// console.log(res)
 		// 因为没有总页码，所有只能这样判断下一页有没有数据
 		if(res.success&&res.data.length > 0) {
 			dispatch(getTopicList(res.data))
@@ -37,9 +44,20 @@ export const getTopicListAsync = (params) => {
 export const addTopicListAsync = (params) => {
 	return async (dispatch) => {
 		let res = await tAjax(CN_API.get_topics, params)
-		console.log(res)
+		// console.log(res)
 		if(res.success) {
 			dispatch(addTopicList(res.data, params.page))
+		}
+	}
+}
+
+// 获取话题详情信息
+export const getTopicDetailAsync = (params) => {
+	return async (dispatch) => {
+		let res = await tAjax(CN_API.get_topic_detail + params.id, {mdrender: params.mdrender})
+		console.log(res)
+		if(res.success) {
+			dispatch(getTopicDetail(res.data))
 		}
 	}
 }

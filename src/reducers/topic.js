@@ -1,12 +1,15 @@
 import {
   GET_TOPIC_LIST,
-  ADD_TOPIC_LIST
+  ADD_TOPIC_LIST,
+  GET_TOPIC_DETAIL
 } from './../constants/topic'
 
 const TOPIC_STATE = {
   page: 1,
   limit: 20,
-  list: []
+  list: [],
+  topicContent: {},
+  topicReply: []
 }
 
 export default (state = TOPIC_STATE, action) => {
@@ -22,7 +25,13 @@ export default (state = TOPIC_STATE, action) => {
 		  ...state, 
 		  list: state.list.concat(action.list),
 		  page: action.page
-	  }
+    }
+  case GET_TOPIC_DETAIL: 
+    return {
+      ...state,
+      topicReply: action.detail.replies,
+      topicContent: {...action.detail, replies: null}
+    }
       default:
         return state;
   }
