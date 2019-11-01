@@ -15,13 +15,13 @@ class Index extends Component {
 
   componentWillUnmount() { }
 
+  /* config = {
+    navigationBarTitleText: 'CNode'
+  } */
+
   componentDidShow() { }
 
   componentDidHide() { }
-
-  /* config = {
-    navigationBarTitleText: '999'
-  } */
 
   render() {
     Taro.setNavigationBarTitle({title: 'CNode'})

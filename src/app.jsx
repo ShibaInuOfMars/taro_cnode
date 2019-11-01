@@ -21,12 +21,15 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
-      'pages/detail/index'
+      'pages/detail/index',
+      'pages/login/index',
+      'pages/user/index',
+      'pages/info/index'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#80bd01',
-      navigationBarTitleText: 'CNode',
+      navigationBarTitleText: '',
       navigationBarTextStyle: 'white'
     }
   }

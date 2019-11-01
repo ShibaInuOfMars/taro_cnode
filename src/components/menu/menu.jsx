@@ -47,6 +47,10 @@ class Menu extends Component {
 		}
 	}
 
+	jumpToLogin() {
+		Taro.navigateTo({url: '/pages/login/index'})
+	}
+
 	render() {
 		const { currentCata, cataData, drawerState, showMenu, hideMenu } = this.props
 		const items = this.getItems(cataData)
@@ -57,7 +61,7 @@ class Menu extends Component {
 				<View className='topiclist-menu'>
 					<Image onClick={showMenu} className='meun-icon' src={require('./../../assets/images/cata.png')} mode='widthFix' />
 					<Text>{currentCata.value}</Text>
-					<Image className='meun-icon' src={require('./../../assets/images/login.png')} mode='widthFix' />
+					<Image onClick={this.jumpToLogin} className='meun-icon' src={require('./../../assets/images/login.png')} mode='widthFix' />
 				</View>
 			</View>
 		)
