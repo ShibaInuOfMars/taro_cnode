@@ -20,6 +20,7 @@ class TopicContent extends Component {
 						<Text className='info visit-count'>{(topicContent.visit_count || '') + ' ' + '次浏览'}</Text>
 						<Text className='info tab'>来自 {tabType || ''}</Text>
 					</View>
+					<View className='collect' hoverClass='collect-press'>收藏</View>
 				</View>
 
 				<View className='topic-content'>

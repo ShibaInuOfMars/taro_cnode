@@ -7,9 +7,11 @@ import { connect } from '@tarojs/redux'
 
 import { showDrawer, hideDrawer, changeCata } from './../../actions/menu';
 
+import { isLogin } from './../../actions/user'
+
 import './menu.less'
 
-const mapStateToProps = (store) => ({ ...store.menu, limit: store.topic.limit })
+const mapStateToProps = (store) => ({ ...store.menu, user: store.user, limit: store.topic.limit })
 
 const mapDispatchToProps = (dispatch) => ({
 	showMenu: () => {
@@ -48,7 +50,15 @@ class Menu extends Component {
 	}
 
 	jumpToLogin() {
-		Taro.navigateTo({url: '/pages/login/index'})
+		const { user } = this.props
+		// console.log(this.state)
+		let res = isLogin(user)
+
+		if(res) {
+			Taro.navigateTo({url: '/pages/user/index'})
+		} else {
+			Taro.navigateTo({url: '/pages/login/index'})
+		}
 	}
 
 	render() {

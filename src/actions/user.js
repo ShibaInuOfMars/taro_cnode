@@ -43,3 +43,12 @@ export const requestDataOfTypeAsync = (type, loginname) => {
 		}
   }
 }
+
+// 验证用户是否登录
+export const isLogin = (params) => {
+	if(params&&params.accesstoken) {
+		return true
+	} else {
+		return false
+	}
+}
