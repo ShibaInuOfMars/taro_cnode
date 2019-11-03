@@ -13,7 +13,7 @@ const isWeapp = process.env.TARO_ENV === 'weapp'
 class TopicReply extends Component {
 
 	render() {
-		const { topicReply } = this.props
+		const { topicReply, author } = this.props
 
 		return (
 			<View className='topic-reply-wrapper'>
@@ -30,6 +30,9 @@ class TopicReply extends Component {
 										<Text className='name'>{reply.author ? reply.author.loginname : ''}</Text>
 										<Text className='floor'>{index + 1}楼</Text>
 										<Text className='time'>{timeTransform(reply.create_at)}</Text>
+										{
+											(reply.author.loginname === author.loginname) && (reply.author.avatar_url === author.avatar_url) ? <Text className='isauthor'>作者</Text> : null
+										}
 									</View>
 									{
 										reply.ups.length > 0 && (
@@ -55,7 +58,8 @@ class TopicReply extends Component {
 }
 
 TopicReply.defaultProps = {
-	topicReply: []
+	topicReply: [],
+	author: {}
 }
 
 export default TopicReply

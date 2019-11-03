@@ -11,7 +11,9 @@ import {getTopicDetailAsync} from './../../actions/topic'
 
 const mapStateToProps = (store) => ({
 	topicContent: store.topic.topicContent,
-	topicReply: store.topic.topicReply
+	topicReply: store.topic.topicReply,
+	accesstoken: store.user.accesstoken,
+	collectState: store.topic.collectState 
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -25,8 +27,20 @@ const mapDispatchToProps = (dispatch) => ({
 class Detail extends Component {
 
 	componentDidMount() {
+		this.getDetail()
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.collectState !== nextProps.collectState) { // 判断下一次的状态是否与上次一致，不一致则重新请求数据
+			this.getDetail()
+		}
+		// console.log(nextProps)
+	}
+
+	getDetail() {
 		const id = this.$router.params.topicId
-		this.props.getTopicDetail({id, mdrender: 'true'})
+		const { accesstoken } = this.props
+		this.props.getTopicDetail({id, accesstoken, mdrender: 'true'})
 	}
 
 	render() {
@@ -36,7 +50,7 @@ class Detail extends Component {
 		return (
 			<View className='detail'>
 				<TopicContent topicContent={topicContent} />
-				<TopicReply topicReply={topicReply} />
+				<TopicReply topicReply={topicReply} author={topicContent.author} />
 			</View>
 		)
 	}

@@ -1,9 +1,47 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text, RichText} from '@tarojs/components'
 
+import {connect} from '@tarojs/redux'
+
+import {collectTopicAsync, deCollectTopicAsync} from './../../actions/topic'
+
+import {isLogin} from './../../actions/user'
+
 import './topicContent.less'
 
+const mapStateToProps = (store) => ({user: store.user})
+
+const mapDispatchToProps = (dispatch) => ({
+	collectTopic(params) {
+		 return dispatch(collectTopicAsync(params))
+	},
+	deCollectTopic(params) {
+		return dispatch(deCollectTopicAsync(params))
+	}
+})
+
+@connect(mapStateToProps, mapDispatchToProps)
+
 class TopicContent extends Component {
+
+	collecttopic(topic) {
+		// console.log(topic)
+		const {user, collectTopic, deCollectTopic} = this.props
+		// 判断用户是否登录，登录了才能收藏，没有则去登录
+		if(isLogin(user)) {
+			if(!topic.is_collect) { // 点击了收藏
+				collectTopic({accesstoken: user.accesstoken, topic_id: topic.id}).then(res => {
+					// console.log(res)
+					res.success ? Taro.showToast({title: '收藏成功', icon: 'none'}) : Taro.showToast({title: '收藏失败', icon: 'none'})
+					
+				})
+			} else { // 点击了取消收藏
+				deCollectTopic({accesstoken: user.accesstoken, topic_id: topic.id}).then(res => {
+					res.success ? Taro.showToast({title: '取消收藏成功', icon: 'none'}) : Taro.showToast({title: '取消收藏失败', icon: 'none'})
+				})
+			}
+		}
+	}
 
 	render() {
 		const {topicContent} = this.props
@@ -20,7 +58,7 @@ class TopicContent extends Component {
 						<Text className='info visit-count'>{(topicContent.visit_count || '') + ' ' + '次浏览'}</Text>
 						<Text className='info tab'>来自 {tabType || ''}</Text>
 					</View>
-					<View className='collect' hoverClass='collect-press'>收藏</View>
+					<View className={['collect', topicContent.is_collect ? 'cancel-collect' : '']} hoverClass={topicContent.is_collect ? 'collect-press-cancel' : 'collect-press'} onClick={this.collecttopic.bind(this, topicContent)}>{topicContent.is_collect ? '取消收藏' : '收藏'}</View>
 				</View>
 
 				<View className='topic-content'>

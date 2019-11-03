@@ -1,3 +1,5 @@
+import Taro from '@tarojs/taro'
+
 import {
 	SAVE_TOKEN_AND_NAME,
 	TOKEN_FAIL
@@ -49,6 +51,6 @@ export const isLogin = (params) => {
 	if(params&&params.accesstoken) {
 		return true
 	} else {
-		return false
+		Taro.navigateTo({url: '/pages/login/index'})
 	}
 }
