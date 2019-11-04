@@ -27,6 +27,7 @@ export default (state = USER_STATE, action) => {
       setCache(cacheKey, newState)
       return newState
     case TOKEN_FAIL:
+      console.log(state)
       let failState = {
         ...state,
         accesstoken: null,
@@ -34,7 +35,7 @@ export default (state = USER_STATE, action) => {
         avatar_url: null
       }
       setCache(cacheKey, failState)
-      return newState
+      return failState
     default:
       return state;
   }

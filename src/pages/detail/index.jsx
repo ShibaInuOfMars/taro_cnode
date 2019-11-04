@@ -46,6 +46,7 @@ class Detail extends Component {
 	render() {
 		const {topicContent, topicReply} = this.props
 		// console.log(topicContent)
+		Taro.setNavigationBarTitle({title: topicContent.author&&topicContent.author.loginname || '话题详情'})
 
 		return (
 			<View className='detail'>

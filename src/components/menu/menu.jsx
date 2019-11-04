@@ -50,8 +50,9 @@ class Menu extends Component {
 	}
 
 	jumpToLogin() {
+		// console.log(this.props)
 		const { user } = this.props
-		// console.log(this.state)
+		
 		let res = isLogin(user)
 
 		if(res) {
@@ -65,11 +66,11 @@ class Menu extends Component {
 
 		return (
 			<View>
-				<AtDrawer show={drawerState} mask items={items} onItemClick={this.changeCurrentCata.bind(this)} onClose={hideMenu} />
+				<AtDrawer width='300px' show={drawerState} mask items={items} onItemClick={this.changeCurrentCata.bind(this)} onClose={hideMenu} />
 				<View className='topiclist-menu'>
 					<Image onClick={showMenu} className='meun-icon' src={require('./../../assets/images/cata.png')} mode='widthFix' />
 					<Text>{currentCata.value}</Text>
-					<Image onClick={this.jumpToLogin} className='meun-icon' src={require('./../../assets/images/login.png')} mode='widthFix' />
+					<Image onClick={this.jumpToLogin.bind(this)} className='meun-icon' src={require('./../../assets/images/login.png')} mode='widthFix' />
 				</View>
 			</View>
 		)

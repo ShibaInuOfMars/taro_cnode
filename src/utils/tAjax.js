@@ -25,7 +25,10 @@ export default (url, data, method = 'GET') => {
       return Taro.request({
         url,
         data,
-        method
+        method,
+        header: {
+          'content-type': 'application/json'
+        }
       }).then(res => {
         Taro.hideLoading()
         resolve(res.data);

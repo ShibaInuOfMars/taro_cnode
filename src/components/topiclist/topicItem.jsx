@@ -21,7 +21,7 @@ class TopicItem extends Component {
 
 		return (
 			<View className='item' hoverClass='hover-class' onClick={this.jumpToDetail.bind(this, topicItem)}>
-				<AtAvatar circle image={topicItem.author ? topicItem.author.avatar_url : ''} />
+				<AtAvatar size='small' circle image={topicItem.author ? topicItem.author.avatar_url : ''} />
 				<View className='right'>
 					<View className='title-wrapper'>
 						<View className={'tab'+ ' ' + (!topicItem.top && !topicItem.good ? 'normal' : '')}>{tabType}</View>
